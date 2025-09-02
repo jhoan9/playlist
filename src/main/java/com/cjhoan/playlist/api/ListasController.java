@@ -2,6 +2,7 @@ package com.cjhoan.playlist.api;
 
 import com.cjhoan.playlist.model.ListaDeReproduccion;
 import com.cjhoan.playlist.service.ListaDeReproduccionService;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,9 @@ public class ListasController {
 
     @PostMapping
     public ResponseEntity<ListaDeReproduccion> crearLista(@RequestBody ListaDeReproduccion lista) {
+
+        Gson gson = new Gson();
+        System.out.println("Recibido en /lists POST: " + gson.toJson(lista));
         if (lista.getNombre() == null || lista.getNombre().trim().isEmpty()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
